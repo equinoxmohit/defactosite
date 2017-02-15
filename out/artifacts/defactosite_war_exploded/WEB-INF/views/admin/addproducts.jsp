@@ -7,7 +7,9 @@
     </div>
 
     <div>
-    <form:form commandName="product" method="post" action="${pageContext.request.contextPath}/admin/addproducts">
+    <form:form commandName="product" method="post"
+               action="${pageContext.request.contextPath}/admin/addproducts"
+                enctype="multipart/form-data">
        <div class="form-group">
            <label for="name">Product Name</label>
            <form:input path="productName" id="name" class="form-control" />
@@ -28,11 +30,19 @@
             <label for="stock">Product Stock</label>
             <form:input path="productStock" id="stock" class="form-control" />
         </div>
+
+        <!--division to add image-->
+        <div class="form-group">
+            <label class="control-label" for="productImage">Upload Picture</label>
+            <form:input path="productImage" id="productImage" type="file" class="form:input-large"/>
+        </div>
+
         <br>
         <div>
             <input type="submit" class="btn btn-success" value="Submit" />
             <a href="<c:url value="/admin/products?cancel"/>" class="btn btn-danger">Cancel</a>
         </div>
+
     </form:form>
     </div>
 </div>

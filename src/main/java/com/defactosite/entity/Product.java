@@ -1,9 +1,8 @@
 package com.defactosite.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.persistence.*;
 
 /**
  * Created by equinoxmohit on 2/15/17.
@@ -19,6 +18,9 @@ public class Product {
     private String productManufacturer;
     private double productPrice;
     private String productStock;
+
+    @Transient
+    private MultipartFile productImage;
 
     public int getProductId() {
         return productId;
@@ -66,5 +68,13 @@ public class Product {
 
     public void setProductStock(String productStock) {
         this.productStock = productStock;
+    }
+
+    public MultipartFile getProductImage() {
+        return productImage;
+    }
+
+    public void setProductImage(MultipartFile productImage) {
+        this.productImage = productImage;
     }
 }

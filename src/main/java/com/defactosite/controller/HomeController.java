@@ -9,7 +9,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+
+
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 /**
@@ -17,6 +27,9 @@ import java.util.List;
  */
 @Controller
 public class HomeController {
+
+    //add path here to set path later
+    Path path;
 
     @Autowired
     ProductDao productDao;
@@ -62,11 +75,27 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/admin/addproducts",method = RequestMethod.POST)
-    public String adminAddProducts(@ModelAttribute("product") Product product){
-        productDao.insert(product);
-        return "redirect:/admin/products?success";
-    }
+    public String adminAddProducts(@ModelAttribute("product") Product product, HttpServletRequest request) {
 
+        productDao.insert(product);
+
+        //----------main thing to upload image--------------//
+        MultipartFile productImage = product.getProductImage();
+        String rootDirectory = request.getSession().getServletContext().getRealPath("/");
+        path = Paths.get(rootDirectory + "/WEB-INF/resources/images/" + product.getProductId() +".png");
+
+        if (productImage != null && !productImage.isEmpty()) {
+            try {
+                productImage.transferTo(new File(path.toString()));
+            } catch (Exception e) {
+                e.printStackTrace();
+
+            }
+        }
+        //------------------------------------------------------//
+            return "redirect:/admin/products?success";
+
+    }
 
     @RequestMapping("/admin/delete/{productId}")
     public String deleteProduct(@PathVariable int productId){
