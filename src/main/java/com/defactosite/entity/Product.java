@@ -1,8 +1,10 @@
 package com.defactosite.entity;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 
 /**
  * Created by equinoxmohit on 2/15/17.
@@ -13,10 +15,17 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int productId;
+
+    @NotEmpty(message = "The product name can not be null")
     private String productName;
+
     private String productDescription;
     private String productManufacturer;
+
+    @Min(value = 0, message = "The product price must not be less than zero")
     private double productPrice;
+
+    @Min(value = 0, message = "The product stock must not be less than zero")
     private String productStock;
 
     @Transient

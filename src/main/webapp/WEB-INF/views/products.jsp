@@ -19,7 +19,7 @@
         <c:forEach var="product" items="${products}">
         <tbody>
             <tr>
-                <th><img src="#" class="img-responsive" alt="image" /></th>
+                <th><img src="<c:url value="/resources/images/${product.productId}.png"/>" style="width: 100%" alt="image"  /></th>
                 <th>${product.productName}</th>
                 <th>${product.productDescription}</th>
                 <th>${product.productManufacturer}</th>

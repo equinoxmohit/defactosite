@@ -11,7 +11,7 @@
                action="${pageContext.request.contextPath}/admin/addproducts"
                 enctype="multipart/form-data">
        <div class="form-group">
-           <label for="name">Product Name</label>
+           <label for="name">Product Name</label><form:errors path="productName" cssStyle="color:darkred"/>
            <form:input path="productName" id="name" class="form-control" />
        </div>
         <div class="form-group">
@@ -23,11 +23,11 @@
             <form:input path="productManufacturer" id="manf" class="form-control" />
         </div>
         <div class="form-group">
-            <label for="price">Product Price</label>
+             <label for="price">Product Price</label><form:errors path="productPrice" cssStyle="color:darkred"/>
             <form:input path="productPrice" id="price" class="form-control" />
         </div>
         <div class="form-group">
-            <label for="stock">Product Stock</label>
+            <label for="stock">Product Stock</label><form:errors path="productStock" cssStyle="color:darkred"/>
             <form:input path="productStock" id="stock" class="form-control" />
         </div>
 

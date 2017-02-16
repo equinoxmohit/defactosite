@@ -7,7 +7,7 @@
     </div>
     <div class="row">
         <div class="col-md-5">
-            <img src="#" alt="image" class="img-responsive" />
+            <img src="<c:url value="/resources/images/${product.productId}.png"/>" style="width: 100%" alt="image"  />
         </div>
         <div class="col-md-5">
             <p><strong>Product Name:</strong> ${product.productName}</p>

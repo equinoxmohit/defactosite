@@ -28,6 +28,12 @@ public class ProductDaoImpl implements ProductDao {
         session.flush();
     }
 
+    public void update(Product product) {
+        Session session=sessionFactory.getCurrentSession();
+        session.saveOrUpdate(product);
+        session.flush();
+    }
+
     public List<Product> getAllProduct() {
         Session session=sessionFactory.getCurrentSession();
         Query query=session.createQuery("from Product");
